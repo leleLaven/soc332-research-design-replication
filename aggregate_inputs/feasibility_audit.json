@@ -1,0 +1,19 @@
+{
+  "flows": {
+    "10-17": {
+      "resident_baseline": 3049,
+      "linked_resident_parent_baseline": 2912,
+      "resident_followup": 1746,
+      "reference_spouse_partner_followup": 1597,
+      "no_known_parent_same_fu_followup": 1573,
+      "unique_2001_families": 1173
+    }
+  },
+  "candidate_10_17": {
+    "wealth_negative": 285,
+    "wealth_zero": 149,
+    "wealth_positive": 1139,
+    "ba_classified": 1483,
+    "ba_unknown": 90
+  }
+}
