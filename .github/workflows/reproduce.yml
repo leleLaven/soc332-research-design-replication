@@ -1,0 +1,35 @@
+name: Reproduce feasibility exhibits
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/reproduce.yml
+      - aggregate_inputs/**
+      - reproduce.py
+      - tests/**
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run validation tests
+        run: python -m unittest discover -s tests -v
+      - name: Rebuild aggregate exhibits
+        run: python reproduce.py
+      - name: Verify committed exhibits are reproducible
+        run: git diff --exit-code -- exhibits
+      - name: Upload reproducible exhibits
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-design-feasibility-exhibits
+          path: exhibits/*.csv
